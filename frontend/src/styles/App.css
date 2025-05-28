@@ -1,0 +1,30 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevents scrollbars */
+  height: 100%;
+  width: 100%;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.app {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Make sure the content area can scroll independently if needed */
+.content-area {
+  flex: 1;
+  overflow: auto; /* Only show scrollbars when needed */
+  position: relative;
+}
+
