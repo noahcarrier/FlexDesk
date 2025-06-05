@@ -21,6 +21,8 @@
     "electron": "^36.3.1"
   },
   "dependencies": {
+    "@types/react-router-dom": "^5.3.3",
+    "react-router-dom": "^7.6.2",
     "typescript": "^5.8.3"
   }
 }

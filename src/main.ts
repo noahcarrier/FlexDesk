@@ -9,6 +9,8 @@ function createWindow() {
     width: 1000,
     height: 700,
     frame: false, // Remove default window frame
+    minWidth: 350,
+    minHeight: 350,
     transparent: false,
     webPreferences: {
       nodeIntegration: false,
