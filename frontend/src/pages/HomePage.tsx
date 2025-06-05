@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/HomePage.css';
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isCollapsing, setIsCollapsing] = useState(false);
   const [showButton, setShowButton] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Start the loading timer
@@ -24,6 +26,10 @@ export default function HomePage() {
     return () => clearTimeout(loadingTimer);
   }, []);
 
+  const handleBeginJourney = () => {
+    navigate('/desk');
+  };
+
   return (
     <div className="container">
       <div className="logo">FlexDesk</div>
@@ -36,7 +42,7 @@ export default function HomePage() {
       
       <button 
         className={`enter-button ${showButton ? 'enter-button-visible' : ''}`}
-        onClick={() => console.log("Navigating to dashboard")}
+        onClick={handleBeginJourney}
         style={{ display: showButton ? 'block' : 'none' }}
       >
         Begin Your Journey
