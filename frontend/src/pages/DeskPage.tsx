@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/DeskPage.css';
+import ClockWidget from '../components/widgets/ClockWidget';
+import CalculatorWidget from '../components/widgets/CalculatorWidget';
+import TodoWidget from '../components/widgets/TodoWidget';
+import NotesWidget from '../components/widgets/NotesWidget';
+import WeatherWidget from '../components/widgets/WeatherWidget';
+import TimerWidget from '../components/widgets/TimerWidget';
+import CalendarWidget from '../components/widgets/CalendarWidget';
+import ContactsWidget from '../components/widgets/ContactsWidget';
 
 // Define widget types
 type WidgetType = 'calendar' | 'calculator' | 'todo' | 'notes' | 'weather' | 'clock' | 'timer' | 'contacts';
@@ -10,12 +18,6 @@ interface WidgetOption {
   name: string;
   icon: string;
   description: string;
-}
-
-// Widget instance interface with position info
-interface WidgetInstance {
-  type: WidgetType | null;
-  id: string;
 }
 
 // Available widgets
@@ -83,6 +85,8 @@ export default function DeskPage() {
   const [dragIndex, setDragIndex] = useState<number | null>(null);
   // State to track the next available empty position
   const [nextEmptyIndex, setNextEmptyIndex] = useState<number>(0);
+  // State to track expanded widgets
+  const [expandedWidget, setExpandedWidget] = useState<string | null>(null);
   
   // Find the next empty index whenever widgets change
   useEffect(() => {
@@ -105,7 +109,98 @@ export default function DeskPage() {
       setNextEmptyIndex(index !== -1 ? index : -1);
     }
   };
-  
+    // Handle widget expansion
+  const handleWidgetExpand = (widgetId: string) => {
+    setExpandedWidget(widgetId);
+  };
+
+  const handleWidgetClose = () => {
+    setExpandedWidget(null);
+  };
+
+  // Render the appropriate widget component
+  const renderWidget = (widget: WidgetType, index: number) => {
+    const widgetId = `${widget}-${index}`;
+    const isExpanded = expandedWidget === widgetId;
+    
+    switch (widget) {
+      case 'clock':
+        return (
+          <ClockWidget
+            onExpand={() => handleWidgetExpand(widgetId)}
+            isExpanded={isExpanded}
+            onClose={handleWidgetClose}
+          />
+        );
+      case 'calculator':
+        return (
+          <CalculatorWidget
+            onExpand={() => handleWidgetExpand(widgetId)}
+            isExpanded={isExpanded}
+            onClose={handleWidgetClose}
+          />
+        );
+      case 'todo':
+        return (
+          <TodoWidget
+            onExpand={() => handleWidgetExpand(widgetId)}
+            isExpanded={isExpanded}
+            onClose={handleWidgetClose}
+          />
+        );
+      case 'notes':
+        return (
+          <NotesWidget
+            onExpand={() => handleWidgetExpand(widgetId)}
+            isExpanded={isExpanded}
+            onClose={handleWidgetClose}
+          />
+        );
+      case 'weather':
+        return (
+          <WeatherWidget
+            onExpand={() => handleWidgetExpand(widgetId)}
+            isExpanded={isExpanded}
+            onClose={handleWidgetClose}
+          />
+        );
+      case 'timer':        return (
+          <TimerWidget
+            onExpand={() => handleWidgetExpand(widgetId)}
+            isExpanded={isExpanded}
+            onClose={handleWidgetClose}
+          />
+        );
+      case 'calendar':
+        return (
+          <CalendarWidget
+            onExpand={() => handleWidgetExpand(widgetId)}
+            isExpanded={isExpanded}
+            onClose={handleWidgetClose}
+          />
+        );
+      case 'contacts':
+        return (
+          <ContactsWidget
+            onExpand={() => handleWidgetExpand(widgetId)}
+            isExpanded={isExpanded}
+            onClose={handleWidgetClose}
+          />
+        );
+      default:
+        return (
+          <div className="widget-content">
+            <div className="widget-icon">
+              {WIDGET_OPTIONS.find(opt => opt.type === widget)?.icon}
+            </div>
+            <div className="widget-name">
+              {WIDGET_OPTIONS.find(opt => opt.type === widget)?.name}
+            </div>
+          </div>
+        );
+    }
+  };
+
   // Handle widget box click
   const handleBoxClick = (index: number) => {
     if (isManageMode) return; // Don't open modal in manage mode
@@ -149,13 +244,11 @@ export default function DeskPage() {
     if (!isManageMode) return;
     setDragIndex(index);
   };
-  
-  // Drag over handler
-  const handleDragOver = (e: React.DragEvent, index: number) => {
+    // Drag over handler
+  const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault(); // Allow drop
   };
-  
-  // Drop handler - swap widgets
+    // Drop handler - swap widgets
   const handleDrop = (targetIndex: number) => {
     if (dragIndex === null || !isManageMode) return;
     
@@ -202,9 +295,8 @@ export default function DeskPage() {
             key={index} 
             className={`widget-box ${isManageMode ? 'widget-jiggle' : ''} ${!isBoxVisible(index, widget) ? 'widget-hidden' : ''}`}
             onClick={() => handleBoxClick(index)}
-            draggable={isManageMode && widget !== null}
-            onDragStart={() => handleDragStart(index)}
-            onDragOver={(e) => handleDragOver(e, index)}
+            draggable={isManageMode && widget !== null}            onDragStart={() => handleDragStart(index)}
+            onDragOver={handleDragOver}
             onDrop={() => handleDrop(index)}
           >
             {isManageMode && widget && (
@@ -223,8 +315,7 @@ export default function DeskPage() {
                 </svg>
               </button>
             )}
-            
-            {!widget ? (
+              {!widget ? (
               <div className="add-widget-icon">
                 <svg viewBox="0 0 24 24">
                   <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -233,14 +324,7 @@ export default function DeskPage() {
                 <div className="add-widget-text">Add Widget</div>
               </div>
             ) : (
-              <div className="widget-content">
-                <div className="widget-icon">
-                  {WIDGET_OPTIONS.find(opt => opt.type === widget)?.icon}
-                </div>
-                <div className="widget-name">
-                  {WIDGET_OPTIONS.find(opt => opt.type === widget)?.name}
-                </div>
-              </div>
+              renderWidget(widget, index)
             )}
           </div>
         ))}

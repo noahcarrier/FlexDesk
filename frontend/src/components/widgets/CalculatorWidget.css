@@ -1,0 +1,142 @@
+/* Calculator Widget Styles */
+.calculator-widget-content {
+  text-align: center;
+  width: 100%;
+}
+
+.calc-display-mini {
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.calc-status {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  height: 16px;
+}
+
+/* Expanded Calculator Styles */
+.calculator-expanded {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.calculator-expanded > * {
+  width: 100%;
+  max-width: 400px;
+}
+
+.calc-display {
+  background: #000;
+  color: #fff;
+  font-size: 2rem;
+  font-family: 'Courier New', monospace;
+  text-align: right;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.calc-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.calc-btn {
+  height: 60px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #f0f0f0;
+  color: #333;
+}
+
+.calc-btn:hover {
+  background: #e0e0e0;
+  transform: translateY(-1px);
+}
+
+.calc-btn:active {
+  transform: translateY(0);
+}
+
+.calc-btn-operator {
+  background: #4A90E2;
+  color: white;
+}
+
+.calc-btn-operator:hover {
+  background: #357ABD;
+}
+
+.calc-btn-equals {
+  background: #50E3C2;
+  color: white;
+}
+
+.calc-btn-equals:hover {
+  background: #3DD8B8;
+}
+
+.calc-btn-clear {
+  background: #FF6B6B;
+  color: white;
+}
+
+.calc-btn-clear:hover {
+  background: #FF5252;
+}
+
+/* Calculator Mobile Responsiveness */
+@media (max-width: 480px) {
+  .calculator-expanded {
+    max-width: 100%;
+  }
+  
+  .calc-display {
+    font-size: 1.5rem;
+    padding: 15px;
+    min-height: 50px;
+  }
+  
+  .calc-buttons {
+    gap: 6px;
+  }
+  
+  .calc-btn {
+    height: 50px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .calc-display {
+    font-size: 1.2rem;
+    padding: 12px;
+    min-height: 40px;
+  }
+  
+  .calc-btn {
+    height: 45px;
+    font-size: 0.9rem;
+  }
+}

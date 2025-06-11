@@ -1,0 +1,184 @@
+/* Clock Widget Styles */
+.clock-widget-content {
+  text-align: center;
+}
+
+.clock-time {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  font-family: 'Courier New', monospace;
+}
+
+.clock-date {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Expanded Clock Styles */
+.clock-expanded {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.timezone-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.timezone-selector label {
+  font-weight: 600;
+  color: #555;
+}
+
+.timezone-select {
+  padding: 8px 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: white;
+  color: #333;
+  cursor: pointer;
+}
+
+.timezone-select:focus {
+  outline: none;
+  border-color: #4A90E2;
+}
+
+.timezone-select option {
+  color: #333;
+  background: white;
+}
+
+.world-clocks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.world-clock-item {
+  background: rgba(74, 144, 226, 0.1);
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid rgba(74, 144, 226, 0.2);
+}
+
+.world-clock-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.world-clock-time {
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  color: #333;
+}
+
+.current-display {
+  background: linear-gradient(135deg, #4A90E2, #50E3C2);
+  padding: 32px;
+  border-radius: 16px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3);
+}
+
+.large-time {
+  font-size: 3rem;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.large-date {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+
+.timezone-name {
+  font-size: 1rem;
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+/* Clock Mobile Responsiveness */
+@media (max-width: 768px) {
+  .world-clocks {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+  }
+  
+  .world-clock-item {
+    padding: 12px;
+  }
+  
+  .world-clock-time {
+    font-size: 1.2rem;
+  }
+  
+  .current-display {
+    padding: 24px;
+  }
+  
+  .large-time {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .clock-expanded {
+    gap: 16px;
+  }
+  
+  .world-clocks {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  
+  .world-clock-item {
+    padding: 10px;
+  }
+  
+  .world-clock-name {
+    font-size: 0.8rem;
+  }
+  
+  .world-clock-time {
+    font-size: 1rem;
+  }
+  
+  .current-display {
+    padding: 20px;
+  }
+  
+  .large-time {
+    font-size: 2rem;
+  }
+  
+  .large-date {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .world-clocks {
+    grid-template-columns: 1fr;
+  }
+  
+  .large-time {
+    font-size: 1.8rem;
+  }
+}
